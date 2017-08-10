@@ -126,11 +126,11 @@ def render_int(i, width=None):
 
 def analyze(text, from_encoding):
     print(f"Analyzing: {repr(text)}")
-    print("(printing as {})\n".format(sys.getdefaultencoding()))
+    print(f"({len(text)}-long, printing as {sys.getdefaultencoding()})\n")
 
     bytez = text.encode(from_encoding)
     print(f"Byte form: {repr(bytez)}")
-    print(f"(encoded using {from_encoding})\n")
+    print(f"({len(bytez)} bytes, encoded using {from_encoding})\n")
 
     return render_bytes(bytez)
 
