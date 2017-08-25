@@ -164,29 +164,28 @@ def main():
     'Ã“lafur'
 
     # print(repr(args.analyze))
-    if args.analyze:
-        if not args.encoding:
-            exit("Flag --analyze requires --encoding!")
+    if not args.analyze or not args.encoding:
+        exit("For now, requires --analyze and --encoding flags!")
 
-        result = analyze(args.analyze, args.encoding)
+    result = analyze(args.analyze, args.encoding)
 
-        headers = [
-            "Bytes",
-            "Decimal",
-            "Hex",
-            "ASCII",
-            "cp1252 (Windows 8-bit)",
-            "latin1 (Western 8-bit)",
-            "koi8_r (Russian 8-bit)",
-            "utf-8 (variable-width)",
-            "utf-16 (16-bit)",
-            "utf-32 (32-bit)",
-        ]
+    headers = [
+        "Bytes",
+        "Decimal",
+        "Hex",
+        "ASCII",
+        "cp1252 (Windows 8-bit)",
+        "latin1 (Western 8-bit)",
+        "koi8_r (Russian 8-bit)",
+        "utf-8 (variable-width)",
+        "utf-16 (16-bit)",
+        "utf-32 (32-bit)",
+    ]
 
-        for (h, r) in zip(headers, result.split('\t')):
-            s = ANSI_BOLD if h.startswith(args.encoding) else ''
-            e = ANSI_NORMAL if h.startswith(args.encoding) else ''
-            print("{}{:>24}\t{}{}".format(s, h, r, e))
+    for (h, r) in zip(headers, result.split('\t')):
+        s = ANSI_BOLD if h.startswith(args.encoding) else ''
+        e = ANSI_NORMAL if h.startswith(args.encoding) else ''
+        print("{}{:>24}\t{}{}".format(s, h, r, e))
 
 
 if __name__ == '__main__':
